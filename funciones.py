@@ -12,7 +12,7 @@ def create_data(N):
 
 
 def KNN(X, Y, Z, k=5, p=2.):
-    C = np.unique(Y)
+    C = np.unique(Y) #[0,1]
     N, D = X.shape
     M, _ = Z.shape
     dist = np.zeros(shape=(M, N))
@@ -22,7 +22,7 @@ def KNN(X, Y, Z, k=5, p=2.):
     neighbours = np.argsort(dist, axis=1)[:, :k]
     Z_Y = np.zeros(shape=(M, ))
     for i in range(M):
-        criterion = np.zeros(shape=(len(C),))
+        criterion = np.zeros(shape=(len(C),))#[0,0]
         for c in C:
             criterion[c] = np.sum(1./dist[i, neighbours[i]][Y[neighbours[i]] == c])
         Z_Y[i] = np.argmax(criterion)
